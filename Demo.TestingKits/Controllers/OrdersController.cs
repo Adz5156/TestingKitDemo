@@ -10,6 +10,7 @@ using System.Diagnostics;
 using Demo.TestingKits.Services;
 using Demo.TestingKits.Services.Jobs;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Demo.TestingKits.Controllers
 {
@@ -40,7 +41,15 @@ namespace Demo.TestingKits.Controllers
         [HttpPost]
         public IActionResult Create(OrderViewModel vm)
         {
-            //Check is vm Valid
+
+            if (ModelState.IsValid)
+            {
+                //Add custom validation
+                if (!TestingKitFactory.IsValidPostcode(vm.PostCode, vm.SelectedTestTypes.ToArray()))
+                    ModelState.AddModelError("Region Error", "This postcode " + vm.PostCode + " is not permitted to obtain the selected tests");
+            }
+
+            //Re-Check is vm Valid
             if (!ModelState.IsValid) return View(vm);
 
             try

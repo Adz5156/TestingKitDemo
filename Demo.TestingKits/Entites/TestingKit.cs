@@ -20,6 +20,7 @@ namespace Demo.TestingKits.Entites
 
         public Guid Uid => Guid.NewGuid();
         public Dictionary<TestType, int> TestTypes { get; set; }
+
         public bool ContainsBloodTest => TestTypes.ContainsKey(TestType.Blood);
         public bool ContainsUrineTest => TestTypes.ContainsKey(TestType.Urine);
 
@@ -27,5 +28,6 @@ namespace Demo.TestingKits.Entites
         {
             TestTypes[testType] = quantity;
         }
+
     }
 }
