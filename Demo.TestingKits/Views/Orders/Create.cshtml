@@ -1,0 +1,68 @@
+﻿@model Demo.TestingKits.Models.OrderViewModel
+@using Demo.TestingKits.Factories
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>OrderViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HouseNameOrNo" class="control-label"></label>
+                <input asp-for="HouseNameOrNo" class="form-control" />
+                <span asp-validation-for="HouseNameOrNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Street" class="control-label"></label>
+                <input asp-for="Street" class="form-control" />
+                <span asp-validation-for="Street" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostCode" class="control-label"></label>
+                <input asp-for="PostCode" class="form-control" />
+                <span asp-validation-for="PostCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TelephoneNo" class="control-label"></label>
+                <input asp-for="TelephoneNo" class="form-control" />
+                <span asp-validation-for="TelephoneNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedTestTypes" class="control-label"></label>
+                @foreach (InfectionType Type in Enum.GetValues(typeof(InfectionType)))
+                {
+                    <input name="SelectedTestTypes" type="checkbox" value="@Type" /> @Enum.GetName(typeof(InfectionType), Type)
+                    <br />
+                }
+                <span asp-validation-for="SelectedTestTypes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Home">Back to Home</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
