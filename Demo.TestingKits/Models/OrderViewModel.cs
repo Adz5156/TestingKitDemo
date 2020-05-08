@@ -14,6 +14,9 @@ namespace Demo.TestingKits.Models
         public string Name { get; set; }
 
         [Required]
+        public DateTime DOB { get; set; }
+
+        [Required]
         [Display(Name="House Name/No")]
         public string HouseNameOrNo { get; set; }
         
